@@ -24,5 +24,7 @@ if [ "$IFPREFIX" != "wlm" ]; then
 fi
 
 # Re-name the interface.  Log all errors to syslog.
+ip link set $OLD_IFNAME down
 ip link set dev $OLD_IFNAME name $NEW_IFNAME | \
     logger -p debug -t "vyatta wirelessmodem"
+ip link set $NEW_IFNAME up
